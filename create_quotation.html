@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Quotation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    /* General Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      color: #333;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      width: 250px;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar .logo img {
+      width: 120px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #87b52c;
+    }
+
+    .sidebar .dropdown {
+      position: relative;
+    }
+
+    .sidebar .dropdown > a::after {
+      content: "▸";
+      margin-left: auto;
+      font-size: 0.8rem;
+    }
+
+    .sidebar .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      background-color: #f5f5f5;
+      color: black;
+      min-width: 180px;
+      padding: 0.4rem 0;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      border-radius: 8px;
+    }
+
+    .sidebar .dropdown-content a {
+      display: block;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .sidebar .dropdown-content a:hover {
+      background-color: #e1e1e1;
+    }
+
+    .sidebar .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .sidebar .help {
+      margin-top: auto;
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid #444;
+    }
+
+    /* Main Content Styles */
+    .main {
+      flex: 1;
+      background-color: #f4f4f4;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Form Section Styles */
+    .form-section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 15px;
+    }
+
+    .form-section h2 {
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .items {
+      margin-bottom: 1rem;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .items th,
+    .items td {
+      padding: 0.5rem;
+      text-align: left;
+      border: 1px solid #ccc;
+    }
+
+    .items th {
+      background-color: #eee;
+    }
+
+    .add-item-btn {
+      display: inline-block;
+      margin: 1rem 0;
+      background-color: #87b52c;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Bottom Buttons Styles */
+    .bottom-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding: 0 2rem;
+    }
+
+    .send-btn {
+      background-color: #87b52c;
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="https://via.placeholder.com/120x60?text=Logo" alt="Logo" />
+    </div>
+   <nav>
+      <a href="vendor_dashboard.html">Dashboard</a>
+      <div class="dropdown">
+        <a href="#">Clients</a>
+        <div class="dropdown-content">
+          <a href="view_clients.html">View Clients</a>
+          <a href="create_client.html">Create Client</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#">Create</a>
+        <div class="dropdown-content">
+          <a href="create_invoice.html">Create Invoice</a>
+          <a class="active" href="create_quotation.html">Create Quotation</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#">Status</a>
+        <div class="dropdown-content">
+          <a href="invoice_status.html">Invoice Status</a>
+          <a href="quotation_status.html">Quotation Status</a>
+        </div>
+      </div>
+      <a href="chat.html">Chat</a>
+      <a href="reminder.html">Reminder</a>
+      <a href="landing_page.html">Logout</a>
+      
+    </nav>
+    <div class="help">
+      <a href="#" style="color: white">Help</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="top-bar">
+      <div class="search-profile">
+        <input type="text" placeholder="Search..." />
+        <img src="https://via.placeholder.com/30" alt="Notification" style="border-radius: 50%" />
+        <img src="https://via.placeholder.com/30" alt="Profile" style="border-radius: 50%" />
+      </div>
+    </div>
+    <div class="form-section">
+      <h2>Create Quotation</h2>
+      <div class="form-group">
+        <label>Company Info</label>
+        <textarea placeholder="Enter company name, address, contact..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Client Info</label>
+        <textarea placeholder="Enter client name, address, contact..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Quote Date</label>
+        <input type="date" />
+      </div>
+      <div class="form-group">
+        <label>Valid Until</label>
+        <input type="date" />
+      </div>
+      <table class="items">
+        <thead>
+          <tr><th>Description</th><th>Unit Price</th><th>Qty</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" placeholder="Service Fee" /></td>
+            <td><input type="number" placeholder="0.00" oninput="updateRowTotal(this)" /></td>
+            <td><input type="number" placeholder="1" oninput="updateRowTotal(this)" /></td>
+            <td><input type="text" placeholder="0.00" readonly /></td>
+          </tr>
+          <tr>
+            <td><input type="text" placeholder="Item Description" /></td>
+            <td><input type="number" placeholder="0.00" oninput="updateRowTotal(this)" /></td>
+            <td><input type="number" placeholder="1" oninput="updateRowTotal(this)" /></td>
+            <td><input type="text" placeholder="0.00" readonly /></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="add-item-btn" onclick="addItem()">+ Add Item</button>
+      <div class="form-group">
+        <label>Final Total</label>
+        <input type="text" placeholder="$0.00" readonly />
+      </div>
+    </div>
+    <div class="bottom-buttons">
+      <button type="button" class="send-btn" onclick="saveQuotation()" style="background-color: #555;">Save Quotation</button>
+      <button class="send-btn">Send Quotation</button>
+    </div>
+  </main>
+
+  <script>
+    function addItem() {
+      const tbody = document.querySelector(".items tbody");
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><input type="text" placeholder="Item Description" /></td>
+        <td><input type="number" placeholder="0.00" oninput="updateRowTotal(this)" /></td>
+        <td><input type="number" placeholder="1" oninput="updateRowTotal(this)" /></td>
+        <td><input type="text" placeholder="0.00" readonly /></td>
+      `;
+      tbody.appendChild(row);
+    }
+
+    function updateRowTotal(input) {
+      const row = input.closest("tr");
+      const price = parseFloat(row.cells[1].querySelector("input").value) || 0;
+      const qty = parseFloat(row.cells[2].querySelector("input").value) || 0;
+      const total = (price * qty).toFixed(2);
+      row.cells[3].querySelector("input").value = total;
+      updateFinalTotal();
+    }
+
+    function updateFinalTotal() {
+      let total = 0;
+      document.querySelectorAll(".items tbody tr").forEach(row => {
+        const val = parseFloat(row.cells[3].querySelector("input").value) || 0;
+        total += val;
+      });
+      document.querySelector('input[placeholder="$0.00"]').value = `$${total.toFixed(2)}`;
+    }
+
+    function saveQuotation() {
+      alert("Quotation saved (simulation). In real scenario, data will be sent to server.");
+    }
+
+    document.querySelectorAll('.items tbody input[type="number"]').forEach(input => {
+      input.addEventListener('input', () => updateRowTotal(input));
+    });
+  </script>
+</body>
+</html>

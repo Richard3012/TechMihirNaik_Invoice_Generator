@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Invoice</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      color: #333;
+    }
+    
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+.data-table thead th {
+  background-color: #f9f9f9;
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+.data-table tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+.data-table a {
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #eef2ff;
+  color: #444;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 18px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+
+    .sidebar {
+      width: 250px;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar .logo img {
+      width: 120px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #87b52c;
+    }
+
+    .sidebar .dropdown {
+      position: relative;
+    }
+
+    .sidebar .dropdown > a::after {
+      content: "▸";
+      margin-left: auto;
+      font-size: 0.8rem;
+    }
+
+    .sidebar .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      background-color: #f5f5f5;
+      color: black;
+      min-width: 180px;
+      padding: 0.4rem 0;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      border-radius: 8px;
+    }
+
+    .sidebar .dropdown-content a {
+      display: block;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .sidebar .dropdown-content a:hover {
+      background-color: #e1e1e1;
+    }
+
+    .sidebar .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .sidebar .help {
+      margin-top: auto;
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid #444;
+    }
+
+    .main {
+      flex: 1;
+      background-color: #f4f4f4;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    
+
+    .extra-fields input {
+      margin-top: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .items {
+      margin-bottom: 1rem;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .items th,
+    .items td {
+      padding: 0.5rem;
+      text-align: left;
+      border: 1px solid #ccc;
+    }
+
+    .items th {
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="https://via.placeholder.com/120x60?text=Logo" alt="Logo" />
+    </div>
+    <nav>
+      <a href="vendor_dashboard.html">Dashboard</a>
+      <div class="dropdown">
+        <a class="active" href="#">Clients</a>
+        <div class="dropdown-content">
+          <a class="active" href="view_clients.html">View Clients</a>
+          <a href="create_client.html">Create Client</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#">Create</a>
+        <div class="dropdown-content">
+          <a href="create_invoice.html">Create Invoice</a>
+          <a href="create_quotation.html">Create Quotation</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#">Status</a>
+        <div class="dropdown-content">
+          <a href="invoice_status.html">Invoice Status</a>
+          <a href="quotation_status.html">Quotation Status</a>
+        </div>
+      </div>
+      <a href="chat.html">Chat</a>
+      <a href="reminder.html">Reminder</a>
+      <a href="landing_page.html">Logout</a>
+      
+    </nav>
+    <div class="help">
+      <a href="#" style="color: white">Help</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="top-bar">
+      <div class="search-profile">
+        <input type="text" placeholder="Search..." />
+        <img src="https://via.placeholder.com/30" alt="Notification" style="border-radius: 50%" />
+        <img src="https://via.placeholder.com/30" alt="Profile" style="border-radius: 50%" />
+      </div>
+    </div>
+
+   <table class="data-table">
+  <thead>
+    <tr>
+      
+      <th>Customer</th>
+      <th>Primary Contact</th>
+      <th>Primary Email</th>
+      <th>Phone</th>
+      <th>Active</th>
+      <th>Groups</th>
+      <th>Date Created</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+  </tbody>
+</table>
+
+
+</body>
+</html>

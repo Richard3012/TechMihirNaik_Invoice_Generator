@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invoice Access</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins";
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar .logo img {
+      width: 120px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #87b52c;
+    }
+
+    .sidebar .help {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid #444;
+      text-align: center;
+    }
+
+    .main {
+      flex: 1;
+      background-color: #ccc;
+      padding: 2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .header input[type="text"] {
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #aaa;
+      width: 200px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #87b52c;
+      color: white;
+    }
+
+    td a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    td a:hover {
+      text-decoration: underline;
+    }
+
+    .status-paid {
+      color: green;
+      font-weight: bold;
+    }
+
+    .status-pending {
+      color: orange;
+      font-weight: bold;
+    }
+
+    .status-overdue {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="https://via.placeholder.com/120x60?text=Logo" alt="Logo">
+    </div>
+    <nav>
+        <a href="customer_dashboard.html">Dashboard</a>
+        <a href="quotation_customer.html">Quotation Interaction</a>
+        <a class="active" href="invoice_customer.html">Invoice Access</a>
+        <a href="transaction_customer.html">Transaction History</a>
+        <a href="#">Chat</a>
+        <a href="landing_page.html">Logout</a>
+      </nav>
+    <div class="help">
+      <a href="#" style="color: white;">Help</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="header">
+      <h2>Invoice Access</h2>
+      <input type="text" id="searchInput" placeholder="Search Invoice...">
+    </div>
+    
+    <table id="invoiceTable">
+      <thead>
+        <tr>
+          <th>Invoice Id</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>INV123</td>
+          <td>May 29, 2025</td>
+          <td>$500</td>
+          <td class="status-paid">Paid</td>
+          <td><a href="#">Download</a></td>
+        </tr>
+        <tr>
+          <td>INV124</td>
+          <td>May 30, 2025</td>
+          <td>$2,000</td>
+          <td class="status-pending">Pending</td>
+          <td><a href="#">Download</a></td>
+        </tr>
+        <tr>
+          <td>INV125</td>
+          <td>May 31, 2025</td>
+          <td>$800</td>
+          <td class="status-overdue">OverDue</td>
+          <td><a href="#">Download</a></td>
+        </tr>
+        <tr>
+          <td>INV126</td>
+          <td>Jun 2, 2025</td>
+          <td>$1,500</td>
+          <td class="status-paid">Paid</td>
+          <td><a href="#">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const table = document.getElementById("invoiceTable").getElementsByTagName("tbody")[0];
+
+    searchInput.addEventListener("input", function () {
+      const filter = this.value.toLowerCase();
+      const rows = table.getElementsByTagName("tr");
+
+      for (let row of rows) {
+        const cells = row.getElementsByTagName("td");
+        let match = false;
+        for (let cell of cells) {
+          if (cell.textContent.toLowerCase().includes(filter)) {
+            match = true;
+            break;
+          }
+        }
+        row.style.display = match ? "" : "none";
+      }
+    });
+  </script>
+
+</body>
+</html>

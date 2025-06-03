@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transaction History</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins";
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      color: #333;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar .logo img {
+      width: 120px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.8rem 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #87b52c;
+    }
+
+    .sidebar .help {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid #444;
+      text-align: center;
+    }
+
+    .main {
+      flex: 1;
+      background-color: #ccc;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .search-profile input {
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      border: none;
+      width: 200px;
+    }
+
+    .section {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 15px;
+      margin-bottom: 1.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 0.75rem;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .status-paid {
+      color: green;
+      font-weight: bold;
+    }
+
+    .status-pending {
+      color: orange;
+      font-weight: bold;
+    }
+
+    .btn-view {
+      background-color: #87b52c;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="https://via.placeholder.com/120x60?text=Logo" alt="Logo" />
+    </div>
+    <nav>
+      <a href="customer_dashboard.html">Dashboard</a>
+      <a href="quotation_customer.html">Quotation Interaction</a>
+      <a href="invoice_customer.html">Invoice Access</a>
+      <a class="active" href="transaction_customer.html">Transaction History</a>
+      <a href="#">Chat</a>
+      <a href="landing_page.html">Logout</a>
+    </nav>
+    <div class="help">
+      <a href="#" style="color: white">Help</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="top-bar">
+      <div class="search-profile">
+        <input type="text" placeholder="Search..." />
+        <img src="https://via.placeholder.com/30" alt="Notification" style="border-radius: 50%" />
+        <div class="profile" alt="prof">
+          <img src="https://via.placeholder.com/30" alt="Profile" style="border-radius: 50%" />
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Transaction History</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Invoice Number</th>
+            <th>Client Name</th>
+            <th>Amount</th>
+            <th>Due Date</th>
+            <th>Amount Due</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#INV-1001</td>
+            <td>ABC Pvt Ltd</td>
+            <td>₹25,000</td>
+            <td>2025-06-15</td>
+            <td>NONE</td>
+            <td class="status-paid">Paid</td>
+            <td><button class="btn-view">View</button></td>
+          </tr>
+          <tr>
+            <td>#INV-1002</td>
+            <td>XYZ Corp</td>
+            <td>₹15,500</td>
+            <td>2025-06-10</td>
+            <td>₹5,000</td>
+            <td class="status-pending">Pending</td>
+            <td><button class="btn-view">View</button></td>
+          </tr>
+          <tr>
+            <td>#INV-1003</td>
+            <td>LMN Enterprises</td>
+            <td>₹9,800</td>
+            <td>2025-05-28</td>
+            <td>NONE</td>
+            <td class="status-paid">Paid</td>
+            <td><button class="btn-view">View</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>

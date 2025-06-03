@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quotation Interaction</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins";
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      color: #333;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar .logo img {
+      width: 120px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0.8rem 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #87b52c;
+    }
+
+    .sidebar .help {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid #444;
+      text-align: center;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      background-color: #ccc;
+      padding: 2rem;
+      overflow-y: auto;
+      gap: 2rem;
+    }
+
+    .quotation-list {
+      width: 250px;
+      background: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+
+    .quotation-card {
+      background: #f5f5f5;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .quotation-card:hover {
+      background: #e0e0e0;
+    }
+
+    .quote-section {
+      flex: 1;
+      background-color: white;
+      padding: 1rem;
+      border-radius: 15px;
+    }
+
+    .quote-info {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .quote-box {
+      flex: 1;
+      min-width: 260px;
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+
+    .quote-box h4 {
+      margin-bottom: 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 0.75rem;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background-color: #87b52c;
+      color: white;
+    }
+
+    .totals {
+      text-align: right;
+      margin-top: 1.5rem;
+      font-size: 16px;
+    }
+
+    .totals strong {
+      display: block;
+      font-size: 18px;
+      margin-top: 5px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .actions button {
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .accept {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .reject {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .request {
+      background-color: #ffc107;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="https://via.placeholder.com/120x60?text=Logo" alt="Logo" />
+    </div>
+    <nav>
+        <a href="#">Dashboard</a>
+        <a class="active" href="quotation_customer.html">Quotation Interaction</a>
+        <a href="invoice_customer.html">Invoice Access</a>
+        <a href="transaction_customer.html">Transaction History</a>
+        <a href="#">Chat</a>
+        <a href="landing_page.html">Logout</a>
+      </nav>
+    <div class="help">
+      <a href="#" style="color: white">Help</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- Quotation List -->
+    <div class="quotation-list">
+      <h3>Quotations</h3>
+      <div class="quotation-card" onclick="loadQuotation(0)">Quotation #001</div>
+      <div class="quotation-card" onclick="loadQuotation(1)">Quotation #002</div>
+      <div class="quotation-card" onclick="loadQuotation(2)">Quotation #003</div>
+    </div>
+
+    <!-- Quotation Display -->
+    <div class="quote-section" id="quoteDetails">
+      <!-- Will be populated by JavaScript -->
+    </div>
+
+  </main>
+
+  <script>
+    const quotations = [
+      {
+        from: { name: "Company A", address: "", pan: "ABCDE1234A" },
+        to: { name: "Company B", address: "", pan: "XYZDE1234B" },
+        items: [
+          { desc: "Service 1", qty: 2, rate: 500 },
+          { desc: "Service 2", qty: 1, rate: 1500 }
+        ]
+      },
+      {
+        from: { name: "Company X", address: "", pan: "LMNOP1234L" },
+        to: { name: "Company Y", address: "", pan: "QRSTU5678Q" },
+        items: [
+          { desc: "Consulting", qty: 3, rate: 800 },
+          { desc: "Development", qty: 5, rate: 1000 }
+        ]
+      },
+      {
+        from: { name: "Company C", address: "", pan: "GHIJK6789G" },
+        to: { name: "Company D", address: "", pan: "UVWXZ3456U" },
+        items: [
+          { desc: "Design", qty: 4, rate: 250 },
+          { desc: "Testing", qty: 6, rate: 400 }
+        ]
+      }
+    ];
+
+    function loadQuotation(index) {
+      const q = quotations[index];
+      const amountRows = q.items.map((item, i) => {
+        const amount = item.qty * item.rate;
+        return `<tr>
+          <td>${i + 1}</td>
+          <td>${item.desc}</td>
+          <td>${item.qty}</td>
+          <td>₹${item.rate.toFixed(2)}</td>
+          <td>₹${amount.toFixed(2)}</td>
+        </tr>`;
+      }).join('');
+
+      const subTotal = q.items.reduce((sum, item) => sum + item.qty * item.rate, 0);
+      const discount = 0;
+      const total = subTotal - discount;
+
+      document.getElementById('quoteDetails').innerHTML = `
+        <div class="quote-info">
+          <div class="quote-box">
+            <h4>Quotation by</h4>
+            <p><strong>Name:</strong> ${q.from.name}</p>
+            <p><strong>Address:</strong> ${q.from.address}</p>
+            <p><strong>PAN:</strong> ${q.from.pan}</p>
+          </div>
+          <div class="quote-box">
+            <h4>Quotation to</h4>
+            <p><strong>Name:</strong> ${q.to.name}</p>
+            <p><strong>Address:</strong> ${q.to.address}</p>
+            <p><strong>PAN:</strong> ${q.to.pan}</p>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Item Description</th>
+              <th>Qty.</th>
+              <th>Rate</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>${amountRows}</tbody>
+        </table>
+
+        <div class="totals">
+          <p>Sub Total: ₹${subTotal.toFixed(2)}</p>
+          <p>Discount (0%): ₹${discount.toFixed(2)}</p>
+          <strong>Total: ₹${total.toFixed(2)}</strong>
+        </div>
+
+        <div class="actions">
+          <button class="accept">Accept</button>
+          <button class="reject">Reject</button>
+          <button class="request">Request Changes</button>
+        </div>
+      `;
+    }
+
+    // Load the first quotation by default
+    loadQuotation(0);
+  </script>
+
+</body>
+</html>

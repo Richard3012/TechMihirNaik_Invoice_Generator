@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Vendor Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+  font-family: 'Poppins', sans-serif;
+}
+header {
+  background-color: #000;
+  padding: 1rem 2rem;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #4caf50;
+}
+
+ .footer{
+        text-align: center;
+        color: #ffffff;
+        word-wrap: unset;
+        background-color: #000;
+      }
+.main-container {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  padding-top: 40px;        /* space from top */
+  padding-bottom: 40px;     /* space at bottom for scroll comfort */
+}
+
+.signup-box {
+  max-width: 600px;
+  width: 100%;
+  padding: 30px 40px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+    .signup-box img {
+      display: block;
+      margin: 0 auto 20px;
+      height: 60px;
+    }
+
+    .signup-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .signup-box label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .signup-box input,
+    .signup-box textarea {
+      width: 100%;
+      padding: 12px;
+      background-color: #f1f3f5;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .signup-box textarea {
+      resize: vertical;
+    }
+
+    .signup-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #87b52c;
+      color: white;
+      border: none;
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .signup-box button:hover {
+      background-color: #43a047;
+    }
+  </style>
+</head>
+<body>
+     <header>
+  <div class="header-container">
+    <div class="logo">
+      <img src="/mnt/data/d6937f99-31cb-4081-8a03-e80b19ff790c.png" alt="Logo" />
+    </div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact Us</a>
+    </nav>
+  </div>
+</header>
+
+  <div class="main-container">
+    <div class="signup-box">
+      <h2>Company Sign Up</h2>
+      <form>
+        <label>Company Name</label>
+        <input type="text" placeholder="Techmihirnaik Pvt Ltd" />
+
+        <label>Year of Establishment</label>
+        <input type="text" placeholder="2020" />
+
+        <label>PAN Card Number</label>
+        <input type="text" placeholder="ABCDE1234F" />
+
+        <label>GSTIN</label>
+        <input type="text" placeholder="27ABCDE1234F1Z5" />
+
+        <label>Registered Office Address</label>
+        <textarea rows="3" placeholder="123, Tech Park Road, Pune, India"></textarea>
+
+        <label>Official Email</label>
+        <input type="email" placeholder="info@techmihirnaik.com" />
+
+        <label>Office Number</label>
+        <input type="tel" placeholder="020-11122233" />
+
+        <label>First Name</label>
+        <input type="text" placeholder="Sarang" />
+
+        <label>Last Name</label>
+        <input type="text" placeholder="Agrawal" />
+
+        <label>Email Address</label>
+        <input type="email" placeholder="sarang@example.com" />
+
+        <label>Job Title</label>
+        <input type="text" placeholder="Software Engineer" />
+
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+91-9876543210" />
+
+        <button type="button" onclick="window.location.href='vendor_login.html'">Sign Up</button>
+
+      </form>
+    </div>
+  </div>
+  <div class="footer">
+        <nav>
+        <footer>XYZ</footer>
+    </div>
+</body>
+</html>

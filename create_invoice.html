@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Invoice</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      color: #333;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar .logo img {
+      width: 120px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #87b52c;
+    }
+
+    .sidebar .dropdown {
+      position: relative;
+    }
+
+    .sidebar .dropdown > a::after {
+      content: "▸";
+      margin-left: auto;
+      font-size: 0.8rem;
+    }
+
+    .sidebar .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      background-color: #f5f5f5;
+      color: black;
+      min-width: 180px;
+      padding: 0.4rem 0;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      border-radius: 8px;
+    }
+
+    .sidebar .dropdown-content a {
+      display: block;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .sidebar .dropdown-content a:hover {
+      background-color: #e1e1e1;
+    }
+
+    .sidebar .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .sidebar .help {
+      margin-top: auto;
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid #444;
+    }
+
+    .main {
+      flex: 1;
+      background-color: #f4f4f4;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-section {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 15px;
+    }
+
+    .form-section h2 {
+      margin-bottom: 1rem;
+    }
+
+    .billing-row {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .billing-box {
+      flex: 1;
+      min-width: 280px;
+      background-color: #f9f9f9;
+      padding: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .billing-box h3 {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #444;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .form-actions a {
+      color: #8e44ad;
+      text-decoration: none;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .extra-fields input {
+      margin-top: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .items {
+      margin-bottom: 1rem;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .items th,
+    .items td {
+      padding: 0.5rem;
+      text-align: left;
+      border: 1px solid #ccc;
+    }
+
+    .items th {
+      background-color: #eee;
+    }
+
+    .add-item-btn {
+      display: inline-block;
+      margin: 1rem 0;
+      background-color: #87b52c;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .bottom-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 2rem;
+      padding: 0 2rem;
+    }
+
+    .send-btn {
+      background-color: #87b52c;
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="https://via.placeholder.com/120x60?text=Logo" alt="Logo" />
+    </div>
+    <nav>
+      <a href="vendor_dashboard.html">Dashboard</a>
+      <div class="dropdown">
+        <a href="#">Clients</a>
+        <div class="dropdown-content">
+          <a href="view_clients.html">View Clients</a>
+          <a class="active" href="create_client.html">Create Client</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a class="active" href="#">Create</a>
+        <div class="dropdown-content">
+          <a class="active" href="create_invoice.html">Create Invoice</a>
+          <a href="create_quotation.html">Create Quotation</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#">Status</a>
+        <div class="dropdown-content">
+          <a href="invoice_status.html">Invoice Status</a>
+          <a href="quotation_status.html">Quotation Status</a>
+        </div>
+      </div>
+      <a href="chat.html">Chat</a>
+      <a href="reminder.html">Reminder</a>
+      <a href="landing_page.html">Logout</a>
+      
+    </nav>
+    <div class="help">
+      <a href="#" style="color: white">Help</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="top-bar">
+      <div class="search-profile">
+        <input type="text" placeholder="Search..." />
+        <img src="https://via.placeholder.com/30" alt="Notification" style="border-radius: 50%" />
+        <img src="https://via.placeholder.com/30" alt="Profile" style="border-radius: 50%" />
+      </div>
+    </div>
+
+    <div class="form-section">
+      
+       <h2>Create Invoice</h2>
+      <div class="form-group">
+        <label>Invoice No</label>
+        <input type="text" placeholder="Enter invoice number" />
+      </div>
+      <div class="form-group">
+        <label>Invoice Date</label>
+        <input type="date" />
+      </div>
+      <div class="form-group">
+        <label>Due Date</label>
+        <input type="date" />
+      </div>
+
+      <div class="billing-row">
+        <div class="billing-box">
+          <h3>Billed By <small>Your Details</small></h3>
+          <div class="form-group"><label>Country</label><input type="text" value="India" readonly /></div>
+          <div class="form-group"><label>Your Business Name</label><input type="text" required /></div>
+          <div class="form-group"><label>Your GSTIN (optional)</label><input type="text" /></div>
+          <div class="form-group"><label>Address</label><input type="text" /></div>
+          <div class="form-group"><label>City</label><input type="text" /></div>
+          <div class="form-group"><label>Postal Code / ZIP</label><input type="text" /></div>
+          <div class="form-group"><label>State</label><input type="text" /></div>
+
+          <div class="form-actions">
+            <a href="#" onclick="addExtraField(event, this, 'email')">+ Add Email</a>
+            <a href="#" onclick="addExtraField(event, this, 'pan')">+ Add PAN</a>
+            <a href="#" onclick="addExtraField(event, this, 'custom')">+ Add Custom Fields</a>
+            <div class="extra-fields"></div>
+          </div>
+        </div>
+
+        <div class="billing-box">
+          <h3>Billed To <small>Client's Details</small></h3>
+          <div class="form-group"><label>Country</label><input type="text" value="India" readonly /></div>
+          <div class="form-group"><label>Client's Business Name</label><input type="text" required /></div>
+          <div class="form-group"><label>Client's GSTIN (optional)</label><input type="text" /></div>
+          <div class="form-group"><label>Address</label><input type="text" /></div>
+          <div class="form-group"><label>City</label><input type="text" /></div>
+          <div class="form-group"><label>Postal Code / ZIP</label><input type="text" /></div>
+          <div class="form-group"><label>State</label><input type="text" /></div>
+
+          <div class="form-actions">
+            <a href="#" onclick="addExtraField(event, this, 'email')">+ Add Email</a>
+            <a href="#" onclick="addExtraField(event, this, 'pan')">+ Add PAN</a>
+            <a href="#" onclick="addExtraField(event, this, 'custom')">+ Add Custom Fields</a>
+            <div class="extra-fields"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Payment Method</label>
+        <select>
+          <option value="">Select payment method</option>
+          <option value="cash">Cash</option>
+          <option value="upi">UPI</option>
+          <option value="netbanking">Net Banking</option>
+          <option value="debitcard">Debit Card</option>
+          <option value="creditcard">Credit Card</option>
+        </select>
+      </div>
+
+      <table class="items">
+        <thead>
+          <tr><th>Description</th><th>Unit Price</th><th>Qty</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" placeholder="Service Fee" /></td>
+            <td><input type="number" placeholder="0.00" min="0" step="0.01" oninput="updateRowTotal(this)" /></td>
+            <td><input type="number" placeholder="1" min="0" step="1" oninput="updateRowTotal(this)" /></td>
+            <td><input type="text" placeholder="0.00" readonly /></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="add-item-btn" onclick="addItem()">+ Add Item</button>
+      <div class="form-group">
+        <label>Final Total</label>
+        <input type="text" placeholder="$0.00" readonly />
+      </div>
+    </div>
+
+    <div class="bottom-buttons">
+      <button type="button" class="send-btn" onclick="saveInvoice()" style="background-color: #555;">Save Invoice</button>
+      <button class="send-btn">Send Invoice</button>
+    </div>
+  </main>
+
+  <script>
+    function addItem() {
+      const tbody = document.querySelector(".items tbody");
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><input type="text" placeholder="Item Description" /></td>
+        <td><input type="number" placeholder="0.00" min="0" step="0.01" oninput="updateRowTotal(this)" /></td>
+        <td><input type="number" placeholder="1" min="0" step="1" oninput="updateRowTotal(this)" /></td>
+        <td><input type="text" placeholder="0.00" readonly /></td>
+      `;
+      tbody.appendChild(row);
+    }
+
+    function updateRowTotal(input) {
+      const row = input.closest("tr");
+      const priceInput = row.querySelector("td:nth-child(2) input");
+      const qtyInput = row.querySelector("td:nth-child(3) input");
+      const totalInput = row.querySelector("td:nth-child(4) input");
+
+      const price = parseFloat(priceInput.value) || 0;
+      const qty = parseInt(qtyInput.value) || 0;
+      const total = (price * qty).toFixed(2);
+
+      totalInput.value = total;
+
+      updateFinalTotal();
+    }
+
+    function updateFinalTotal() {
+      const rows = document.querySelectorAll(".items tbody tr");
+      let finalTotal = 0;
+      rows.forEach(row => {
+        const totalInput = row.querySelector("td:nth-child(4) input");
+        finalTotal += parseFloat(totalInput.value) || 0;
+      });
+      document.querySelector('input[placeholder="$0.00"]').value = finalTotal.toFixed(2);
+    }
+
+    function addExtraField(e, link, type) {
+      e.preventDefault();
+      const container = link.parentElement.querySelector(".extra-fields");
+
+      let input = document.createElement("input");
+      input.type = "text";
+      input.style.width = "100%";
+      input.style.marginTop = "0.4rem";
+
+      if (type === "email") {
+        input.placeholder = "Enter Email";
+        input.name = "email";
+      } else if (type === "pan") {
+        input.placeholder = "Enter PAN";
+        input.name = "pan";
+      } else if (type === "custom") {
+        input.placeholder = "Custom Field";
+        input.name = "custom";
+      }
+      container.appendChild(input);
+
+      // Disable the clicked link to prevent multiple adds for the same type
+      link.style.pointerEvents = "none";
+      link.style.color = "gray";
+    }
+
+    function saveInvoice() {
+      alert("Invoice saved (demo action).");
+    }
+  </script>
+</body>
+</html>

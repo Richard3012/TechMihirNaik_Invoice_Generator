@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create Client</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    /* Reset and base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background: #f4f6f8;
+      color: #333;
+    }
+
+    /* Sidebar Styles (copied from your quotation page) */
+    .sidebar {
+      width: 250px;
+      background-color: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar .logo img {
+      width: 120px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      padding: 0.8rem 1rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      background-color: #87b52c;
+    }
+
+    .sidebar .dropdown {
+      position: relative;
+    }
+
+    .sidebar .dropdown > a::after {
+      content: "▸";
+      margin-left: auto;
+      font-size: 0.8rem;
+    }
+
+    .sidebar .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      background-color: #f5f5f5;
+      color: black;
+      min-width: 180px;
+      padding: 0.4rem 0;
+      box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+      border-radius: 8px;
+    }
+
+    .sidebar .dropdown-content a {
+      display: block;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    .sidebar .dropdown-content a:hover {
+      background-color: #e1e1e1;
+    }
+
+    .sidebar .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .sidebar .help {
+      margin-top: auto;
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid #444;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem;
+      background: #f4f6f8;
+    }
+
+    /* Container for the client form (adapted your styles) */
+    .container {
+      max-width: 950px;
+      margin: auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      color: #333;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-top: 0.3rem;
+      margin-bottom: 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    textarea {
+      resize: vertical;
+      padding: 0.55rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      background: #87b52c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      font-size: 1rem;
+      font-weight: 600;
+      justify-self: start;
+    }
+
+    .btn:hover {
+      background: #6c9c20;
+    }
+
+    #preview {
+      max-width: 150px;
+      height: auto;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+      display: none;
+      border: 1px solid #ccc;
+    }
+
+    /* Responsive for smaller screens */
+    @media (max-width: 700px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+      .btn {
+        justify-self: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <img src="https://via.placeholder.com/120x60?text=Logo" alt="Logo" />
+    </div>
+    <nav>
+      <a href="vendor_dashboard.html">Dashboard</a>
+      <div class="dropdown">
+        <a class="active" href="#">Clients</a>
+        <div class="dropdown-content">
+          <a href="view_clients.html">View Clients</a>
+          <a class="active" href="create_client.html">Create Client</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#">Create</a>
+        <div class="dropdown-content">
+          <a href="create_invoice.html">Create Invoice</a>
+          <a href="create_quotation.html">Create Quotation</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <a href="#">Status</a>
+        <div class="dropdown-content">
+          <a href="invoice_status.html">Invoice Status</a>
+          <a href="quotation_status.html">Quotation Status</a>
+        </div>
+      </div>
+      <a href="chat.html">Chat</a>
+      <a href="reminder.html">Reminder</a>
+      <a href="landing_page.html">Logout</a>
+      
+    </nav>
+    <div class="help">
+      <a href="#" style="color: white">Help</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="container">
+      <h2>Add New Client</h2>
+      <form id="clientForm" novalidate>
+        <div class="full-width">
+          <label>Profile Image</label>
+          <input type="file" name="profileImage" accept="image/*" onchange="previewImage(event)" />
+          <img id="preview" src="" alt="Image Preview" />
+        </div>
+
+        <div>
+          <label>First Name*</label>
+          <input type="text" name="firstName" required pattern="^[A-Za-z]{2,}$" />
+        </div>
+        <div>
+          <label>Last Name*</label>
+          <input type="text" name="lastName" required pattern="^[A-Za-z]{2,}$" />
+        </div>
+        <div>
+          <label>Email*</label>
+          <input type="email" name="email" required />
+        </div>
+        <div>
+          <label>Phone</label>
+          <input type="tel" name="phone" pattern="^[0-9]{10}$" placeholder="10-digit number" />
+        </div>
+        <div>
+          <label>Position</label>
+          <input type="text" name="position" />
+        </div>
+        <div>
+          <label>Address</label>
+          <textarea name="address" rows="2"></textarea>
+        </div>
+        <div>
+          <label>City</label>
+          <input type="text" name="city" />
+        </div>
+        <div>
+          <label>State</label>
+          <input type="text" name="state" />
+        </div>
+        <div>
+          <label>Zip Code</label>
+          <input type="text" name="zip" />
+        </div>
+        <div>
+          <label>Country</label>
+          <input type="text" name="country" />
+        </div>
+
+        <div class="full-width">
+          <button class="btn" type="submit">Add Client</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    function previewImage(event) {
+      const input = event.target;
+      const preview = document.getElementById('preview');
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        }
+        reader.readAsDataURL(input.files[0]);
+      } else {
+        preview.src = '';
+        preview.style.display = 'none';
+      }
+    }
+
+    document.getElementById('clientForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!this.checkValidity()) {
+        alert('Please fill in the required fields correctly.');
+        return;
+      }
+      // Here you can handle form submission (e.g. via AJAX)
+      alert('Client added successfully!');
+      this.reset();
+      document.getElementById('preview').style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>
