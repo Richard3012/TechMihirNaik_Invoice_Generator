@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins';
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background: url('/IMAGE/5f08505655b858d52ea4ef07a6fa58d5.gif') no-repeat center center fixed;
+      backdrop-filter: blur(2px);
+      background-size: 100% 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.468);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    header .logo img {
+      height: 50px;
+    }
+
+    .main-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-box {
+      background-color: rgba(255, 255, 255, 0.925);
+      padding: 50px 40px;
+      width: 400px;
+      border-radius: 16px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+      animation: fadeInCenter 1s ease;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      color: #87b52c;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .login-box label {
+      display: block;
+      margin: 14px 0 6px;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      background-color: #f0f0f0;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    .login-box input:focus {
+      background-color: #e0f7fa;
+      outline: none;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0e5e6f;
+      color: white;
+      border: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 15px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .login-box button:hover {
+      background-color: #87b52c;
+      transform: scale(1.03);
+    }
+
+    .login-box .signup-link {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    .login-box .signup-link a {
+      color: #0e5e6f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    @keyframes fadeInCenter {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .login-box {
+        width: 90%;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/IMAGE/company_logo_1.png" alt="Company Logo" />
+    </div>
+  </header>
+
+  <div class="main-container">
+    <div class="login-box">
+      <h2>Customer Login</h2>
+      <form>
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="you@example.com" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="********" required>
+
+        <button type="button" onclick="window.location.href='customer_dash.html'">Login</button>
+      </form>
+      <div class="signup-link">
+        New user? <a href="#">Sign up</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
