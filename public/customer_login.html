@@ -168,19 +168,48 @@
     <div class="right-side">
       <div class="login-box">
         <h2>Customer Login</h2>
-        <form>
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="you@example.com">
-
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="********">
-
-          <button type="button" onclick="window.location.href='customer_dashboard.html'">Login</button>
-        </form>
         
-      </div>
-    </div>
-  </div>
+        <form id="loginForm">
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" placeholder="you@example.com" required />
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" placeholder="********" required />
+
+  <button type="submit">Login</button>
+</form>
+
+<script>
+  const form = document.getElementById('loginForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = form.email.value;
+    const password = form.password.value;
+
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Redirect to respective dashboard
+        window.location.href = result.redirectTo;
+      } else {
+        alert(result.message || 'Login failed');
+      }
+    } catch (err) {
+      alert('An error occurred, please try again');
+      console.error(err);
+    }
+  });
+</script>
+
+
 
   <script>
     function adjustMainContainerHeight() {

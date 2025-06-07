@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechMihir Naik | Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #000;
+      color: #fff;
+      height: 70px;
+      padding: 0 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-img {
+      height: 70px;
+      object-fit: contain;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 2rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #87b52c;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 3rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .left-section {
+      flex: 1;
+      min-width: 300px;
+      padding-right: 2rem;
+    }
+
+    .left-section h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: #0e5e6f;
+      margin-bottom: 1.2rem;
+    }
+
+    .left-section p {
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .experience-box {
+      background-color: #87b52c;
+      color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 1rem;
+      max-width: 500px;
+    }
+
+    .buttons {
+      margin-top: 2rem;
+    }
+
+    .buttons button {
+      background-color: #0e5e6f;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      margin-right: 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .buttons button:hover {
+      background-color: #87b52c;
+      transform: scale(1.05);
+    }
+
+    .carousel {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.slides {
+  display: flex;
+  width: 300%; /* 3 slides */
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover; /* or 'contain' if you don’t want any cropping */
+  border-radius: 12px;
+}
+
+
+
+    .footer {
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        padding: 2rem;
+      }
+
+      .left-section {
+        padding-right: 0;
+        text-align: center;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="/images/company_logo.png" alt="Company logo" class="logo-img" />
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+      <a href="/common_login.html">Login</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="left-section">
+      <h1>Grow Your Business with Smart Planning</h1>
+      <p>We tailor strategies to your unique business goals, helping you scale and succeed in today’s competitive market.</p>
+      <div class="experience-box">
+        Over 35+ years of experience delivering consulting excellence.
+      </div>
+      <div class="buttons">
+        <button>Explore Services</button>
+        <button>Get Started</button>
+      </div>
+    </div>
+
+  <div class="carousel">
+  <div class="slides" id="slide-container">
+    <div class="slide">
+      <img src="https://images.unsplash.com/39/lIZrwvbeRuuzqOoWJUEn_Photoaday_CSD%20%281%20of%201%29-5.jpg?q=80&w=2070&auto=format&fit=crop" alt="Slide 1">
+    </div>
+    <div class="slide">
+      <img src="https://plus.unsplash.com/premium_photo-1661758211006-d41106e4be4d?q=80&w=2071&auto=format&fit=crop" alt="Slide 2">
+    </div>
+    <div class="slide">
+      <img src="https://plus.unsplash.com/premium_photo-1683133974170-762dc561d292?q=80&w=2070&auto=format&fit=crop" alt="Slide 3">
+    </div>
+  </div>
+</div>
+
+  </div>
+
+  <div class="footer">
+    &copy; TechMihir Naik. All rights reserved.
+  </div>
+
+  <script>
+    let index = 0;
+    const slides = document.getElementById('slide-container');
+    setInterval(() => {
+      index = (index + 1) % 3;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }, 3000);
+  </script>
+
+</body>
+</html>
